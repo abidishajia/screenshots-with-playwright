@@ -24,31 +24,18 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: "3.9"
-      - id: install-pipenv
-        name: Install pipenv
-        run: pipx install pipenv
-        shell: bash
 
       - id: install-python
         name: Install Python
         uses: actions/setup-python@v2
         with:
           python-version: "3.9"
-          cache: "pipenv"
-
-      - id: cache-playwright
-        name: Cache Playwright browsers
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/ms-playwright/
-          key: ${{ runner.os }}-browsers
 
       - id: install-python-dependencies
         name: Install Python dependencies
-        run: pipenv install --dev
-        shell: bash
+        run: pip install --dev
 
       - id: install-playwright
         name: Install Playwright dependencies
-        run: pipenv run shot-scraper install
+        run: pip install playwright
         shell: bash
