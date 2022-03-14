@@ -2,6 +2,7 @@ from datetime import datetime
 import asyncio
 from playwright.async_api import async_playwright
 
+
 async def run(playwright):
     chromium = playwright.chromium
     browser = await chromium.launch(headless=False)
@@ -19,7 +20,7 @@ async def run(playwright):
 
     date = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
 
-    await page.screenshot(path='{}-wapo.png'.format(date), full_page=True)
+    await page.screenshot(path='screenshots/{}-wapo.png'.format(date), full_page=True)
     await browser.close()
 
 
