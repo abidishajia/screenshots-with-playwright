@@ -21,13 +21,9 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
-      - name: Install pipenv
-        run: pipx install pipenv
       - uses: actions/setup-python@v2
         with:
           python-version: "3.9"
-          cache: "pipenv"
-      - run: pipenv install --python `which python`
       - run: pip install -r requirements.txt
       - name: Run scraper
-        run: pipenv run python3 main.py
+        run: python3 main.py
