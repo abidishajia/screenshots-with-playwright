@@ -40,8 +40,10 @@ jobs:
         run: pip install playwright
         shell: bash
 
-      - name: run scraper
-        run: python setup.py
+      - name: run script
+        run: |
+          python setup.py
+
       - name: Add and commit
         run: |-
           git add .	
