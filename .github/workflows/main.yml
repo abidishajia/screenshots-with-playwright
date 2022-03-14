@@ -33,7 +33,7 @@ jobs:
 
       - id: install-python-dependencies
         name: Install Python dependencies
-        run: pip install --dev
+        run: pip install -r requirements.txt
 
       - id: install-playwright
         name: Install Playwright dependencies
