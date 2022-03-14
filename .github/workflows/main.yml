@@ -26,5 +26,6 @@ jobs:
           python-version: "3.9"
       - run: pip install -r requirements.txt
       - run: playwright install-deps chromium
+      - run: playwright install
       - name: Run scraper
         run: python3 main.py
