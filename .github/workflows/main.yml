@@ -34,4 +34,4 @@ jobs:
       - name: Install operating system dependencies
         run: python -m playwright install-deps
       - name: Run scraper
-        run: python main.py
+        run: python setup.py
