@@ -40,6 +40,9 @@ jobs:
         run: pip install playwright
         shell: bash
 
+      - name: Run playwright install
+        run: playwright install
+
       - name: run script
         run: |
           python setup.py
