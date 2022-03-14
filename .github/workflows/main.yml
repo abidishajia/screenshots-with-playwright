@@ -28,4 +28,4 @@ jobs:
       - run: playwright install-deps chromium
       - run: playwright install
       - name: Run scraper
-        run: python3 main.py
+        run: python main.py
