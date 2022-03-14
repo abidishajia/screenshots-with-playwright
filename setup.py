@@ -24,10 +24,7 @@ async def run(playwright):
     await browser.close()
 
 
-# async def main():
-#     async with async_playwright() as playwright:
-#         await run(playwright)
-# asyncio.run(main())
-
-
-testing_if_works = True
+async def main():
+    async with async_playwright() as playwright:
+        await run(playwright)
+asyncio.run(main())
