@@ -5,22 +5,34 @@ from playwright.async_api import async_playwright
 
 async def run(playwright):
     chromium = playwright.chromium
-    browser = await chromium.launch(headless=False)
+    browser = await chromium.launch()
     device = playwright.devices["iPad Mini"]
     # context = await browser.new_context(**device)
 
     page = await browser.new_page()
     await page.goto("https://www.washingtonpost.com")
-    await page.wait_for_load_state("networkidle")
+    await page.wait_for_load_state("domcontentloaded")
+    await page.set_viewport_size({"width": 1600, "height": 1000})
+    page_height = await page.evaluate("() => document.body.scrollHeight")
+    await page.set_viewport_size({"width": 1600, "height": page_height})
     # await page.evaluate("document.body.style.zoom=0.4")
 
-    #! This has the no effect
-    # await page.evaluate("async() => {for (let i = 0; i < document.body.scrollHeight; i+=100) {window.scrollTo({top: 0, left:i, behaviour: 'smooth'})}}")
-    # await page.wait_for_timeout(6000)
+    # await page.evaluate("""async() => {
+    #     const timeout = (ms) => {
+    #         return new Promise((resolve) => {
+    #             setTimeout(resolve, ms);
+    #         });
+    #     };
+    #     for (let i = 0; i < document.body.scrollHeight; i+=100) {
+    #         window.scrollTo(0, i);
+    #         await timeout(500);
+    #     }
+    # }""")
+    await page.wait_for_timeout(6000)
 
     date = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
 
-    await page.screenshot(path='screenshots/{}-wapo.png'.format(date), full_page=True)
+    await page.screenshot(path='screenshots/{}-washingtonpost.png'.format(date), full_page=True)
     await browser.close()
 
 
