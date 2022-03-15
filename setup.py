@@ -1,5 +1,6 @@
 from datetime import datetime
 import asyncio
+from socket import timeout
 from playwright.async_api import async_playwright
 
 
@@ -10,7 +11,7 @@ async def run(playwright):
     # context = await browser.new_context(**device)
 
     page = await browser.new_page()
-    await page.goto("https://www.washingtonpost.com")
+    await page.goto("https://www.washingtonpost.com", timeout=120000)
     await page.wait_for_load_state("domcontentloaded")
     await page.set_viewport_size({"width": 1600, "height": 1000})
     page_height = await page.evaluate("() => document.body.scrollHeight")
